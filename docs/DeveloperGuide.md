@@ -410,7 +410,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **Tutor**: The user of TutorMap - A private tutor that teaches school subjects to students.
+* **Student**: Students under the teaching of the tutor.
+* **Parent**: Parents of `Students` under the teaching of the tutor.
+* **Agent**: A person that helps match `Students` to the tutor.
+* **Subject**: School subjects that the tutor teaches, eg. English, Math.
+* **Related contact**: Contacts that are related. Examples:
+    * `students` and their `parents` are related.
+    * `agents` are related to the `students`/`parents` that the `agent` referred to the tutor.
+    * `students`/`parents` are related to other `students`/`parents` that they referred to the tutor.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
