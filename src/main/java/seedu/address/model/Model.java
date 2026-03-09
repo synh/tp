@@ -35,14 +35,14 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Tutormap file path.
      */
-    Path getAddressBookFilePath();
+    Path getTutorMapFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' TutorMap file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTutorMapFilePath(Path addressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
