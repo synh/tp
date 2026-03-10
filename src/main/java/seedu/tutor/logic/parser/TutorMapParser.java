@@ -8,15 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.tutor.commons.core.LogsCenter;
-import seedu.tutor.logic.commands.AddCommand;
-import seedu.tutor.logic.commands.ClearCommand;
-import seedu.tutor.logic.commands.Command;
-import seedu.tutor.logic.commands.DeleteCommand;
-import seedu.tutor.logic.commands.EditCommand;
-import seedu.tutor.logic.commands.ExitCommand;
-import seedu.tutor.logic.commands.FindCommand;
-import seedu.tutor.logic.commands.HelpCommand;
-import seedu.tutor.logic.commands.ListCommand;
+import seedu.tutor.logic.commands.*;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,6 +68,9 @@ public class TutorMapParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

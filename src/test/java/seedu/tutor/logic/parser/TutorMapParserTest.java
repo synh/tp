@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tutor.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.tutor.testutil.Assert.assertThrows;
 import static seedu.tutor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,9 +23,11 @@ import seedu.tutor.logic.commands.ExitCommand;
 import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.commands.HelpCommand;
 import seedu.tutor.logic.commands.ListCommand;
+import seedu.tutor.logic.commands.RemarkCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.person.NameContainsKeywordsPredicate;
 import seedu.tutor.model.person.Person;
+import seedu.tutor.model.person.Remark;
 import seedu.tutor.testutil.EditPersonDescriptorBuilder;
 import seedu.tutor.testutil.PersonBuilder;
 import seedu.tutor.testutil.PersonUtil;
@@ -86,6 +89,14 @@ public class TutorMapParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_remark() throws Exception {
+        final String remark = "Some remark.";
+        RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + remark);
+        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(remark)), command);
     }
 
     @Test
