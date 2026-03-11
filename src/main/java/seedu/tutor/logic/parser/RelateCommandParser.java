@@ -10,8 +10,14 @@ import java.util.Map;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATION;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and returns a new RelateCommand object
@@ -41,6 +47,17 @@ public class RelateCommandParser implements Parser<RelateCommand>{
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE), pe);
+        }
+
+        // errors
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()
+                || argMultimap.getValue(PREFIX_EMAIL).isPresent()
+                || argMultimap.getValue(PREFIX_PHONE).isPresent()
+                || argMultimap.getValue(PREFIX_ADDRESS).isPresent()
+                || argMultimap.getValue(PREFIX_TAG).isPresent()
+                || argMultimap.getValue(PREFIX_RELATION).isPresent()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));
         }
 
         // currently assume only one operation per command

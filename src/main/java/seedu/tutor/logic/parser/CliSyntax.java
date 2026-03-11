@@ -12,6 +12,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_RELATION = new Prefix("r/");
+
+    // sub-RelateCommand prefixes
     public static final Prefix PREFIX_RELATE_ADD = new Prefix("a\\");
     public static final Prefix PREFIX_RELATE_DELETE = new Prefix("d\\");
 
