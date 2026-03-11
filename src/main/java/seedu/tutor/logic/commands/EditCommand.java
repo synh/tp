@@ -102,8 +102,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Relation> updatedRelations = editPersonDescriptor.getRelations().orElse(personToEdit.getRelations());
+        String updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRelations);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedRelations, updatedSubject);
     }
 
     @Override
@@ -141,6 +143,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Set<Relation> relations;
+        private String subject;
 
         public EditPersonDescriptor() {}
 
@@ -155,13 +158,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setRelations(toCopy.relations);
+            setSubject(toCopy.subject);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, relations, subject);
         }
 
         public void setName(Name name) {
@@ -230,7 +234,13 @@ public class EditCommand extends Command {
             return (relations != null) ? Optional.of(Collections.unmodifiableSet(relations)) : Optional.empty();
         }
 
+        public void setSubject(String subject) {
+            this.subject = subject;
+        }
 
+        public Optional<String> getSubject() {
+            return Optional.ofNullable(subject);
+        }
 
         @Override
         public boolean equals(Object other) {
@@ -248,7 +258,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(relations, otherEditPersonDescriptor.relations)
+                    && Objects.equals(subject, otherEditPersonDescriptor.subject);
         }
 
         @Override
@@ -259,6 +271,8 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("relations", relations)
+                    .add("subject", subject)
                     .toString();
         }
     }
