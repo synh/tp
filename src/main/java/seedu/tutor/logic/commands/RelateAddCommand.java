@@ -4,7 +4,10 @@ import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.relation.Relation;
 
-public class RelateAddCommand extends RelateCommand{
+/**
+ * skeleton code for RelateAddCommand
+ */
+public class RelateAddCommand extends RelateCommand {
 
     public static final String MESSAGE_SUCCESS = "";
 

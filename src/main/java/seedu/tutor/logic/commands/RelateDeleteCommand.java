@@ -4,8 +4,10 @@ import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.relation.Relation;
 
-
-public class RelateDeleteCommand extends RelateCommand{
+/**
+ * skeleton code for RelateDeleteCommand
+ */
+public class RelateDeleteCommand extends RelateCommand {
 
     public static final String MESSAGE_SUCCESS = "";
 

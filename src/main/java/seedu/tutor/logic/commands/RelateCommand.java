@@ -1,20 +1,16 @@
 package seedu.tutor.logic.commands;
 
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
+
 import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.model.relation.Relation;
 
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Creates subtype of RelateCommand.
  */
-public abstract class RelateCommand extends Command{
+public abstract class RelateCommand extends Command {
 
     public static final String COMMAND_WORD = "relate";
 

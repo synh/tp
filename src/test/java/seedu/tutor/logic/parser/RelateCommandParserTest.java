@@ -1,29 +1,30 @@
 package seedu.tutor.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.tutor.logic.commands.RelateAddCommand;
 import seedu.tutor.logic.commands.RelateCommand;
 import seedu.tutor.logic.commands.RelateDeleteCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 public class RelateCommandParserTest {
 
     private final RelateCommandParser parser = new RelateCommandParser();
-    String[] success_args = new String[] {"1 a\\test/test/test/test", "1 d\\1/1/1/1",
-            "10    d\\   h sdw /  ewd as   qwe/adw  xdww/  dwdsd       qwdqw"};
-    String[] failure_args = new String[] {"", "1", "1 a\\test", "1 a\\test/test", "1 a\\test/test/test",
-            "1 a\\test/test/test/test/test", "a\\test/test/test/test"};
-    String[] extra_args = new String[] {"1 a\\test/test/test/test n/linq", "1 d\\1/1/1/1 p/1234567",
-            "10    d\\   h sdw /  ewd as   qwe/adw  xdww/  dwdsd       qwdqw e/"};
+    private final String[] successArgs = new String[] {"1 a\\test/test/test/test", "1 d\\1/1/1/1",
+        "10    d\\   h sdw /  ewd as   qwe/adw  xdww/  dwdsd       qwdqw"};
+    private final String[] failureArgs = new String[] {"", "1", "1 a\\test", "1 a\\test/test", "1 a\\test/test/test",
+        "1 a\\test/test/test/test/test", "a\\test/test/test/test"};
+    private final String[] extraArgs = new String[] {"1 a\\test/test/test/test n/linq", "1 d\\1/1/1/1 p/1234567",
+        "10    d\\   h sdw /  ewd as   qwe/adw  xdww/  dwdsd       qwdqw e/"};
 
     @Test
-    public void parser_RelateCommand_success() {
-        int passCount = success_args.length;
-        int testCount = success_args.length;
-        for (String args: success_args) {
+    public void parserRelateCommandSuccess() {
+        int passCount = successArgs.length;
+        int testCount = successArgs.length;
+        for (String args: successArgs) {
             Object o = new Object();
             try {
                 o = parser.parse(args);
@@ -38,10 +39,10 @@ public class RelateCommandParserTest {
     }
 
     @Test
-    public void parser_RelateCommand_failure() {
-        int errorCount = failure_args.length;
+    public void parserRelateCommandFailure() {
+        int errorCount = failureArgs.length;
         int testCount = 0;
-        for (String args: failure_args) {
+        for (String args: failureArgs) {
             Object o = new Object();
             try {
                 o = parser.parse(args);
@@ -56,11 +57,11 @@ public class RelateCommandParserTest {
     }
 
     @Test
-    public void RelateCommand_Type_Test() {
-        RelateCommand[] results = new RelateCommand[success_args.length];
-        for (int i = 0; i < success_args.length; i++) {
+    public void relateCommandTypeTest() {
+        RelateCommand[] results = new RelateCommand[successArgs.length];
+        for (int i = 0; i < successArgs.length; i++) {
             try {
-                results[i] = parser.parse(success_args[i]);
+                results[i] = parser.parse(successArgs[i]);
             } catch (ParseException pe) {
                 assert(false);
             }
@@ -71,10 +72,10 @@ public class RelateCommandParserTest {
     }
 
     @Test
-    public void extra_args_Test() {
-        int errorCount = extra_args.length;
+    public void extraArgsTest() {
+        int errorCount = extraArgs.length;
         int testCount = 0;
-        for (String args: extra_args) {
+        for (String args: extraArgs) {
             Object o = new Object();
             try {
                 o = parser.parse(args);

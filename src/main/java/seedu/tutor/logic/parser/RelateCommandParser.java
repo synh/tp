@@ -1,12 +1,5 @@
 package seedu.tutor.logic.parser;
 
-import seedu.tutor.commons.core.index.Index;
-import seedu.tutor.logic.commands.RelateCommand;
-import seedu.tutor.logic.parser.exceptions.ParseException;
-import seedu.tutor.model.relation.Relation;
-
-import java.util.Map;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -18,12 +11,19 @@ import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Map;
+
+import seedu.tutor.commons.core.index.Index;
+import seedu.tutor.logic.commands.RelateCommand;
+import seedu.tutor.logic.parser.exceptions.ParseException;
+import seedu.tutor.model.relation.Relation;
+
 /**
  * Parses input arguments and returns a new RelateCommand object
  */
-public class RelateCommandParser implements Parser<RelateCommand>{
+public class RelateCommandParser implements Parser<RelateCommand> {
 
-    private final static Map<Prefix, String> RelateCommandTypeHashMap =  Map.of(
+    private static final Map<Prefix, String> RelateCommandTypeHashMap = Map.of(
             PREFIX_RELATE_ADD, "add",
             PREFIX_RELATE_DELETE, "delete"
     );
