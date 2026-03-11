@@ -1,5 +1,6 @@
 package seedu.tutor.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
@@ -38,6 +39,11 @@ public abstract class RelateCommand extends Command {
      * @return Subtype of RelateCommand.
      */
     public static RelateCommand create(Index index, RelateCommandType type, Relation relation) {
+
+        requireNonNull(index);
+        requireNonNull(type);
+        requireNonNull(relation);
+
         switch (type) {
 
         case ADD -> {
@@ -49,7 +55,8 @@ public abstract class RelateCommand extends Command {
         }
 
         default -> {
-            throw new IllegalArgumentException();
+            // should not reach here
+            return null;
         }
 
         }
