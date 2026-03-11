@@ -1,7 +1,6 @@
 package seedu.tutor.logic.parser;
 
 import seedu.tutor.commons.core.index.Index;
-import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.commands.RelateCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.relation.Relation;
