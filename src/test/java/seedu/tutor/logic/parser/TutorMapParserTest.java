@@ -55,10 +55,16 @@ public class TutorMapParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName(PersonBuilder.DEFAULT_NAME)
+                .withPhone(PersonBuilder.DEFAULT_PHONE)
+                .withEmail(PersonBuilder.DEFAULT_EMAIL)
+                .withAddress(PersonBuilder.DEFAULT_ADDRESS)
+                .build();
+
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

@@ -6,14 +6,16 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "friends" ],
-    "relations": [ "Elle Meyer/Alice Pauline/mother/child" ]
+    "relations": [ "Elle Meyer/Alice Pauline/mother/child" ],
+    "subject": "math"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
-    "relations": [ "Elle Meyer/Benson Meier/mother/child" ]
+    "relations": [ "Elle Meyer/Benson Meier/mother/child" ],
+    "subject": "math"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
