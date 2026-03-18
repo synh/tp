@@ -14,8 +14,8 @@ import seedu.tutor.model.relation.Relation;
 
 
 /**
- * Add or delete a relation between two Person in the list.
- * Bidirectional, relation object is added or deleted on both Person object.
+ * Add or delete a relation between two person in the list.
+ * Bidirectional, Relation object is added or deleted on both Person object.
  */
 public class RelateCommand extends Command {
 
