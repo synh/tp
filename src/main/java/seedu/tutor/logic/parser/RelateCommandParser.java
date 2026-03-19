@@ -11,7 +11,9 @@ import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATION;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import seedu.tutor.logic.commands.RelateCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
@@ -38,8 +40,6 @@ public class RelateCommandParser implements Parser<RelateCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RELATE_ADD, PREFIX_RELATE_DELETE);
 
-        Relation relation;
-
         // errors
         if (argMultimap.getValue(PREFIX_NAME).isPresent()
                 || argMultimap.getValue(PREFIX_EMAIL).isPresent()
@@ -50,18 +50,25 @@ public class RelateCommandParser implements Parser<RelateCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));
         }
-
-        // currently assume only one operation per command
-        // can expand to add and/or delete of multiple relation per command
-        if (argMultimap.getValue(PREFIX_RELATE_ADD).isPresent()) {
-            relation = ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATE_ADD).get());
-            return new RelateCommand(relation, relateCommandTypeMap.get(PREFIX_RELATE_ADD));
-        } else if (argMultimap.getValue(PREFIX_RELATE_DELETE).isPresent()) {
-            relation = ParserUtil.parseRelation(argMultimap.getValue(PREFIX_RELATE_DELETE).get());
-            return new RelateCommand(relation, relateCommandTypeMap.get(PREFIX_RELATE_DELETE));
-        } else {
+        if (argMultimap.getAllValues(PREFIX_RELATE_ADD).isEmpty()
+                && argMultimap.getAllValues(PREFIX_RELATE_DELETE).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));
         }
+
+        Set<Relation> relationsToAdd = new HashSet<>();
+        Set<Relation> relationsToDelete = new HashSet<>();
+        if (!argMultimap.getAllValues(PREFIX_RELATE_ADD).isEmpty()) {
+            for (String rel : argMultimap.getAllValues(PREFIX_RELATE_ADD)) {
+                relationsToAdd.add(ParserUtil.parseRelation(rel));
+            }
+        }
+        if (!argMultimap.getAllValues(PREFIX_RELATE_DELETE).isEmpty()) {
+            for (String rel : argMultimap.getAllValues(PREFIX_RELATE_DELETE)) {
+                relationsToDelete.add(ParserUtil.parseRelation(rel));
+            }
+        }
+
+        return new RelateCommand(relationsToAdd, relationsToDelete);
     }
 }

@@ -15,10 +15,11 @@ import seedu.tutor.model.person.Person;
 import seedu.tutor.model.relation.Relation;
 
 /**
- * Deletes relation(s) from specified Person.
+ * Deletes one relation from specified Person.
  */
-public class RelateDeleteCommand extends RelateCommand {
+public class RelateDeleteCommand extends Command {
 
+    public static final String MESSAGE_RELATE_SUCCESS = "Updated relation to Person: %1$s";
     public static final String MESSAGE_INVALID_RELATION_TO_DELETE = "The relation does not exist in Person";
 
     private final Index index;
@@ -30,7 +31,6 @@ public class RelateDeleteCommand extends RelateCommand {
      * to the command factory in {@link RelateCommand}.
      */
     RelateDeleteCommand(Index index, Relation relationToDelete) {
-        super(relationToDelete, RelateCommandType.DELETE);
         requireNonNull(index);
         requireNonNull(relationToDelete);
 

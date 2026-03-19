@@ -15,10 +15,11 @@ import seedu.tutor.model.person.Person;
 import seedu.tutor.model.relation.Relation;
 
 /**
- * Adds relation(s) into specified Person.
+ * Adds one relation into specified Person.
  */
-public class RelateAddCommand extends RelateCommand {
+public class RelateAddCommand extends Command {
 
+    public static final String MESSAGE_RELATE_SUCCESS = "Updated relation to Person: %1$s";
     private final Index index;
     private final Relation relationToAdd;
 
@@ -28,7 +29,6 @@ public class RelateAddCommand extends RelateCommand {
      * to the command factory in {@link RelateCommand}.
      */
     RelateAddCommand(Index index, Relation relationToAdd) {
-        super(relationToAdd, RelateCommandType.ADD);
         requireNonNull(index);
         requireNonNull(relationToAdd);
 

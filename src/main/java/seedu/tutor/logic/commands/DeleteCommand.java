@@ -2,6 +2,7 @@ package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,11 +44,13 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        Set<Relation> relations = personToDelete.getRelations();
-        for (Relation relation: relations) {
-            RelateCommand command = new RelateCommand(relation, RelateCommand.RelateCommandType.DELETE);
-            command.execute(model);
-        }
+        Set<Relation> relationsToDelete = personToDelete.getRelations();
+
+        // delete relations
+        RelateCommand relateCommand = new RelateCommand(new HashSet<>(), relationsToDelete);
+        relateCommand.execute(model);
+
+        // update the variable
         personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));

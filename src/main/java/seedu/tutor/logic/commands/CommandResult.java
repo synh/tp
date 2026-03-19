@@ -43,6 +43,11 @@ public class CommandResult {
      * @return New CommandResult object with merged feedback, showHelp and exit are false.
      */
     public static CommandResult merge(CommandResult result1, CommandResult result2) {
+        if (result1 == null) {
+            return result2;
+        } else if (result2 == null) {
+            return result1;
+        }
         String newFeedback = result1.getFeedbackToUser() + "\n" + result2.getFeedbackToUser();
         return new CommandResult(newFeedback);
     }
