@@ -3,6 +3,7 @@ package seedu.tutor.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.commons.util.ToStringBuilder;
@@ -10,6 +11,7 @@ import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.exceptions.CommandException;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.person.Person;
+import seedu.tutor.model.relation.Relation;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -41,6 +43,12 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Set<Relation> relations = personToDelete.getRelations();
+        for (Relation relation: relations) {
+            RelateCommand command = new RelateCommand(relation, RelateCommand.RelateCommandType.DELETE);
+            command.execute(model);
+        }
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
