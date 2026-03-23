@@ -174,7 +174,6 @@ public class RelateCommand extends Command {
             } catch (CommandException ce) {
                 exceptions = CommandException.merge(exceptions, ce);
             }
-
         }
 
         if (exceptions != null) {

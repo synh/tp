@@ -18,7 +18,7 @@ public class RelateCommandParserTest {
         "d\\3/3/3/3", "d\\4/4/4/4 d\\5/5/5/5 p/0123456 a\\6/6/6/6"};
 
     @Test
-    public void valid_input_parse_test() {
+    public void parse_validInput_success() {
         int expect = validInput.length;
         int test = 7;
         for (String input: validInput) {
@@ -32,7 +32,7 @@ public class RelateCommandParserTest {
     }
 
     @Test
-    public void invalid_input_format_parse_test() {
+    public void parse_invalidInputFormat_failure() {
         int expect = invalidInput.length;
         int test = 0;
         for (String input: invalidInput) {
@@ -46,7 +46,7 @@ public class RelateCommandParserTest {
     }
 
     @Test
-    public void extra_args_parse_test() {
+    public void parse_extraArgsInput_failure() {
         int expect = extraArgs.length;
         int test = 0;
         for (String input: extraArgs) {
