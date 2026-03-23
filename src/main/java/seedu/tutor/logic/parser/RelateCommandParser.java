@@ -30,7 +30,7 @@ public class RelateCommandParser implements Parser<RelateCommand> {
 
         // errors
         if (argMultimap.getAllValues(PREFIX_RELATE_ADD).isEmpty()
-                && argMultimap.getAllValues(PREFIX_RELATE_DELETE).isEmpty() || !validCommand(args)) {
+                && argMultimap.getAllValues(PREFIX_RELATE_DELETE).isEmpty() || !validCommandFormat(args)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RelateCommand.MESSAGE_USAGE));
         }
@@ -56,7 +56,7 @@ public class RelateCommandParser implements Parser<RelateCommand> {
      * @param args The user's input.
      * @return The validity of the user's input for relate command.
      */
-    private boolean validCommand(String args) {
+    private boolean validCommandFormat(String args) {
         args = args.trim();
         int len = args.length();
         int accu = 0;
