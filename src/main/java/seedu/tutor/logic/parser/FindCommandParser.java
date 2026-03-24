@@ -7,6 +7,7 @@ import java.util.Arrays;
 import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.person.NameContainsKeywordsPredicate;
+import seedu.tutor.model.person.RelationContainsStringPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -23,6 +24,17 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (trimmedArgs.startsWith("r/")) {
+            String trimmed = trimmedArgs.substring(2).trim();
+            String slashRegex = "[ /]+$";
+            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
+                throw new ParseException("Keyword missing! Please specify a non-space, non-slash keyword after 'r/' \n"
+                        + "Example: find r/Alex Yeoh, find r/parent");
+            }
+
+            return new FindCommand(new RelationContainsStringPredicate(trimmed));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
