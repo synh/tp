@@ -130,7 +130,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `TutorMap`, which `Person` references. This allows `TutorMap` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Label` list in the `TutorMap`, which `Person` references. This allows `TutorMap` to only require one `Label` object per unique label, instead of each `Person` needing their own `Label` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should run on any mainstream OS that supports Java without requiring OS-specific setup beyond Java.
 2.  All user data should be stored locally on the user’s device.
 3.  Should support an effectively unbounded number of contacts, limited only by the user’s local storage capacity.
-4.  Should not impose a hard limit on the number of tags per contact.
+4.  Should not impose a hard limit on the number of labels per contact.
 5.  Saving updates should be efficient and avoid unnecessary full-file rewrites for small changes.
 
 ### Glossary
