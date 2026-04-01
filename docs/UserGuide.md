@@ -6,8 +6,6 @@ TutorMap offers you a simple way to stay organized without complex software. If 
 
 ## Table of Contents
 
-<div style="font-size: 15px">
-
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help)
@@ -26,7 +24,6 @@ TutorMap offers you a simple way to stay organized without complex software. If 
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
 
-</div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start

@@ -9,12 +9,12 @@ import java.util.Set;
 import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.commons.util.StringUtil;
 import seedu.tutor.logic.parser.exceptions.ParseException;
+import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Address;
 import seedu.tutor.model.person.Email;
 import seedu.tutor.model.person.Name;
 import seedu.tutor.model.person.Phone;
 import seedu.tutor.model.relation.Relation;
-import seedu.tutor.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -97,26 +97,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String tag} into a {@code Label}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Label parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Label.isValidLabelName(trimmedTag)) {
+            throw new ParseException(Label.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Label(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tags} into a {@code Set<Label>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Label> parseLabel(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Label> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
@@ -124,26 +124,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String subject} into a {@code Subject}.
+     * Parses a {@code String subject} into a {@code Label}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Subject} is invalid.
+     * @throws ParseException if the given {@code subject} is invalid.
      */
-    public static Tag parseSubject(String subject) throws ParseException {
+    public static Label parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
-        if (!Tag.isValidTagName(trimmedSubject)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Label.isValidLabelName(trimmedSubject)) {
+            throw new ParseException(Label.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedSubject);
+        return new Label(trimmedSubject);
     }
 
     /**
-     * Parses {@code Collection<String> subjects} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> subjects} into a {@code Set<Label>}.
      */
-    public static Set<Tag> parseSubjects(Collection<String> tags) throws ParseException {
+    public static Set<Label> parseSubjects(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        final Set<Tag> subjectSet = new HashSet<>();
+        final Set<Label> subjectSet = new HashSet<>();
         for (String tagName : tags) {
             subjectSet.add(parseTag(tagName));
         }
@@ -163,7 +163,21 @@ public class ParserUtil {
         if (!Relation.isValidRelationName(trimmedRelation)) {
             throw new ParseException(Relation.MESSAGE_CONSTRAINTS);
         }
-        return new Relation(trimmedRelation);
+
+        // Trim each segment
+        String[] parts = trimmedRelation.split("/");
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] = parts[i].trim();
+        }
+
+        // Ensure that names are different
+        if (parts[0].equals(parts[1])) {
+            throw new ParseException(Relation.MESSAGE_SAME_PERSON);
+        }
+
+        String trimmedReconstructed = String.join("/", parts);
+
+        return new Relation(trimmedReconstructed);
     }
 
     /**
