@@ -30,7 +30,7 @@ Class HiddenOutside #FFFFFF
 
 LogicManager .up.|> Logic
 LogicManager -left-> TutorMapParser
-TutorMapParser ..> ParserClasses
+TutorMapParser ..> ParserClasses : <<create>>
 ParserClasses .up.> XYZCommand : <<create>>
 
 XYZCommand -up-|> Command
