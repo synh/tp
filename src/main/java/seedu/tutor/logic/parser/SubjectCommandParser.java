@@ -41,15 +41,15 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_CHANGE_SUBJECT).isPresent()) {
-            String temp0 = argMultimap.getValue(PREFIX_CHANGE_SUBJECT).get();
-            String[] temp1 = temp0.split("/");
-            if (temp1.length != 2 || temp0.endsWith("/") || index != null) {
+            String userInput = argMultimap.getValue(PREFIX_CHANGE_SUBJECT).get();
+            String[] subjects = userInput.split("/");
+            if (subjects.length != 2 || userInput.endsWith("/") || index != null) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
             }
             Label[] labels = new Label[2];
             try {
-                labels[0] = ParserUtil.parseTag(temp1[0]);
-                labels[1] = ParserUtil.parseTag(temp1[1]);
+                labels[0] = ParserUtil.parseTag(subjects[0]);
+                labels[1] = ParserUtil.parseTag(subjects[1]);
             } catch (ParseException pe) {
                 throw new ParseException(SUBJECT_NAME_ERROR);
             }
@@ -57,16 +57,16 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DELETE_SUBJECT).isPresent()) {
-            String temp0 = argMultimap.getValue(PREFIX_DELETE_SUBJECT).get();
-            String[] temp1 = temp0.split("/");
-            if (temp1.length == 0 || temp0.endsWith("/") || index != null) {
+            String userInput = argMultimap.getValue(PREFIX_DELETE_SUBJECT).get();
+            String[] subjects = userInput.split("/");
+            if (subjects.length == 0 || userInput.endsWith("/") || index != null) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
             }
-            Label[] labels = new Label[temp1.length];
-            for (int i = 0; i < temp1.length; i++) {
+            Label[] labels = new Label[subjects.length];
+            for (int i = 0; i < subjects.length; i++) {
                 Label temp;
                 try {
-                    temp = ParserUtil.parseTag(temp1[i]);
+                    temp = ParserUtil.parseTag(subjects[i]);
                 } catch (ParseException pe) {
                     throw new ParseException(SUBJECT_NAME_ERROR);
                 }
@@ -76,16 +76,16 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_EDIT_SUBJECT).isPresent()) {
-            String temp0 = argMultimap.getValue(PREFIX_EDIT_SUBJECT).get();
-            String[] temp1 = temp0.split("/");
-            if (temp1.length == 0 || temp0.endsWith("/") || index == null) {
+            String userInput = argMultimap.getValue(PREFIX_EDIT_SUBJECT).get();
+            String[] subjects = userInput.split("/");
+            if (subjects.length == 0 || userInput.endsWith("/") || index == null) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
             }
-            Label[] labels = new Label[temp1.length];
-            for (int i = 0; i < temp1.length; i++) {
+            Label[] labels = new Label[subjects.length];
+            for (int i = 0; i < subjects.length; i++) {
                 Label temp;
                 try {
-                    temp = ParserUtil.parseTag(temp1[i]);
+                    temp = ParserUtil.parseTag(subjects[i]);
                 } catch (ParseException pe) {
                     throw new ParseException(SUBJECT_NAME_ERROR);
                 }
