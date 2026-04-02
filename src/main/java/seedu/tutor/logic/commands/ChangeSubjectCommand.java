@@ -3,8 +3,6 @@ package seedu.tutor.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NEW_SUBJECT;
 import static seedu.tutor.logic.parser.CliSyntax.PREFIX_OLD_SUBJECT;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_ADD;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_RELATE_DELETE;
 
 import java.util.ArrayList;
 import java.util.HashSet;
