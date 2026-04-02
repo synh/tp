@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import seedu.tutor.commons.core.LogsCenter;
 import seedu.tutor.logic.commands.AddCommand;
-import seedu.tutor.logic.commands.ChangeSubjectCommand;
 import seedu.tutor.logic.commands.ClearCommand;
 import seedu.tutor.logic.commands.Command;
 import seedu.tutor.logic.commands.DeleteCommand;

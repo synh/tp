@@ -1,65 +1,57 @@
 package seedu.tutor.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tutor.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.tutor.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NEW_SUBJECT;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_OLD_SUBJECT;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_CHANGE_SUBJECT;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_DELETE_SUBJECT;
+import static seedu.tutor.logic.parser.CliSyntax.PREFIX_EDIT_SUBJECT;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import seedu.tutor.logic.commands.ChangeSubjectCommand;
+import seedu.tutor.logic.commands.SubjectCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.label.Label;
 
 /**
- * Parses input arguments and returns a new ChangeSubjectCommand object
+ * Parses input arguments and returns a new SubjectCommand object
  */
-public class SubjectCommandParser implements Parser<ChangeSubjectCommand> {
+public class SubjectCommandParser implements Parser<SubjectCommand> {
 
-    private static final String SUBJECT_NAME_ERROR = "Subject name should be alphanumerical.";
+    private static final String SUBJECT_NAME_ERROR = "Subject name should be alphanumerical.\n";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ChangeSubjectCommand
-     * and returns a ChangeSubjectCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SubjectCommand
+     * and returns a SubjectCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ChangeSubjectCommand parse(String args) throws ParseException {
+    public SubjectCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NEW_SUBJECT, PREFIX_OLD_SUBJECT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_EDIT_SUBJECT, PREFIX_CHANGE_SUBJECT,
+                PREFIX_DELETE_SUBJECT);
 
+        int argumentCount = argMultimap.getAllValues(PREFIX_CHANGE_SUBJECT).size()
+                + argMultimap.getAllValues(PREFIX_DELETE_SUBJECT).size()
+                + argMultimap.getAllValues(PREFIX_EDIT_SUBJECT).size();
 
-        // errors
-        if (argMultimap.getAllValues(PREFIX_NEW_SUBJECT).isEmpty()
-                || argMultimap.getAllValues(PREFIX_OLD_SUBJECT).isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangeSubjectCommand.MESSAGE_USAGE));
+        if (argumentCount != 1) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
         }
 
-        Set<String> oldSubject = new HashSet<>();
-        Set<String> newSubject = new HashSet<>();
-        if (!argMultimap.getAllValues(PREFIX_OLD_SUBJECT).isEmpty()) {
-            oldSubject.addAll(argMultimap.getAllValues(PREFIX_OLD_SUBJECT));
-        }
-        if (!argMultimap.getAllValues(PREFIX_NEW_SUBJECT).isEmpty()) {
-            newSubject.addAll(argMultimap.getAllValues(PREFIX_NEW_SUBJECT));
-        }
-
-        if (oldSubject.size() != 1 || newSubject.size() != 1) {
-            throw new ParseException(String.format(MESSAGE_DUPLICATE_FIELDS + ChangeSubjectCommand.MESSAGE_USAGE));
-        }
-
-        Set<Label> oldSubjectLabel;
-        Set<Label> newSubjectLabel;
-
-        try {
-            oldSubjectLabel = ParserUtil.parseLabel(oldSubject);
-            newSubjectLabel = ParserUtil.parseLabel(newSubject);
-        } catch (ParseException pe) {
-            throw new ParseException(SUBJECT_NAME_ERROR);
+        if (argMultimap.getValue(PREFIX_CHANGE_SUBJECT).isPresent()) {
+            String temp0 = argMultimap.getValue(PREFIX_CHANGE_SUBJECT).get();
+            String[] temp1 = temp0.split("/");
+            if (temp1.length != 2 || temp0.endsWith("/")) {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
+            }
+            Label[] labels = new Label[2];
+            try {
+                labels[0] = ParserUtil.parseTag(temp1[0]);
+                labels[1] = ParserUtil.parseTag(temp1[1]);
+            } catch (ParseException pe) {
+                throw new ParseException(SUBJECT_NAME_ERROR);
+            }
+            return new SubjectCommand(SubjectCommand.SubjectCommandType.CHANGE, labels);
         }
 
-        return new ChangeSubjectCommand((Label) oldSubjectLabel.toArray()[0], (Label) newSubjectLabel.toArray()[0]);
+        // should not reach here
+        return null;
     }
 }

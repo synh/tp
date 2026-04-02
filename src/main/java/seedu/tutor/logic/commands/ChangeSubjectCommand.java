@@ -1,8 +1,6 @@
 package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_NEW_SUBJECT;
-import static seedu.tutor.logic.parser.CliSyntax.PREFIX_OLD_SUBJECT;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,16 +19,6 @@ import seedu.tutor.model.person.Person;
  */
 public class ChangeSubjectCommand extends Command {
 
-    public static final String COMMAND_WORD = "changeSubject";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Changes a particular subject across all person.\n"
-            + "Parameters: "
-            + "[" + PREFIX_OLD_SUBJECT + "OLD_SUBJECT] "
-            + "[" + PREFIX_NEW_SUBJECT + "NEW_NEW_SUBJECT]\n"
-            + "OLD_SUBJECT and NEW_SUBJECT should only contain alphanumerical symbols.\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_OLD_SUBJECT + "Math " + PREFIX_NEW_SUBJECT + "A-Math";
-
     private final Label oldSubject;
     private final Label newSubject;
     private final EditCommandParser parser = new EditCommandParser();
@@ -40,7 +28,7 @@ public class ChangeSubjectCommand extends Command {
      * @param oldSubject The name of the subject to be changed.
      * @param newSubject The name of the subject to be added.
      */
-    public ChangeSubjectCommand(Label oldSubject, Label newSubject) {
+    ChangeSubjectCommand(Label oldSubject, Label newSubject) throws CommandException {
         this.oldSubject = oldSubject;
         this.newSubject = newSubject;
     }
