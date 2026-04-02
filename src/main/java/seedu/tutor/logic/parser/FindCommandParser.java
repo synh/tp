@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import seedu.tutor.logic.commands.FindCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
+import seedu.tutor.model.person.EmailContainsStringPredicate;
 import seedu.tutor.model.person.NameContainsKeywordsPredicate;
 import seedu.tutor.model.person.RelationContainsStringPredicate;
 import seedu.tutor.model.person.SubjectContainsStringPredicate;
@@ -48,6 +49,18 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
 
             return new FindCommand(new SubjectContainsStringPredicate(trimmed));
+        }
+
+        if (trimmedArgs.startsWith("e/")) {
+            String trimmed = trimmedArgs.substring(2).trim();
+            String slashRegex = "[ /]+$";
+            if (trimmed.isEmpty() || trimmed.matches(slashRegex)) {
+                throw new ParseException("Keyword missing! Please specify a non-space, "
+                        + "non-slash keyword (email) after 'e/' \n"
+                        + "Example: find e/gmail, find e/alexyeoh123@fakemail.com");
+            }
+
+            return new FindCommand(new EmailContainsStringPredicate(trimmed));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
