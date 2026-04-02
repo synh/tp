@@ -36,7 +36,7 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             index = null;
         }
 
-        if (countChar(args, '\\') > 1) {
+        if (countChar(args, '\\') != 1) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
         }
 
