@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 Participant ":LogicManager" as logic LOGIC_COLOR
 Participant ":TutorMapParser" as abp LOGIC_COLOR
-Participant ":Parser<Command>" as ecp LOGIC_COLOR
+Participant ":Parser" as ecp LOGIC_COLOR
 Participant "command:Command" as ec LOGIC_COLOR
 
 [-> logic : execute
