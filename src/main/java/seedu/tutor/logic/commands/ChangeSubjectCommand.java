@@ -40,14 +40,15 @@ public class ChangeSubjectCommand extends Command {
 
         for (Person currentPerson : persons) {
             if (checkPersonContainSubject(currentPerson, this.oldSubject)) {
-                Person personDeletedSubject = createChangeSubjectPerson(currentPerson, this.oldSubject, this.newSubject);
+                Person personDeletedSubject = createChangeSubjectPerson(currentPerson, this.oldSubject,
+                        this.newSubject);
                 model.setPerson(currentPerson, personDeletedSubject);
                 isChanged = true;
             }
         }
 
         if (isChanged) {
-            return new CommandResult("Subject changed: " + oldSubject.labelName  + " has changed to "
+            return new CommandResult("Subject changed: " + oldSubject.labelName + " has changed to "
                 + newSubject.labelName + ".");
         } else {
             return new CommandResult("No subject changed.");

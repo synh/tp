@@ -47,8 +47,8 @@ public class EditSubjectCommand extends Command {
         Person personToEditSubject = lastShownList.get(index.getZeroBased());
         Set<Label> oldSubjects = personToEditSubject.getSubjects();
         Set<Label> mutableOldSubjects = new HashSet<>(oldSubjects);
-        Set<Label> newSubjects = subjectsXorOperarion(mutableOldSubjects
-                , new HashSet<Label>(Arrays.asList(subjectsToEdits)));
+        Set<Label> newSubjects = subjectsXorOperarion(mutableOldSubjects,
+                new HashSet<Label>(Arrays.asList(subjectsToEdits)));
 
         Person edittedPerson = createEditSubjectPerson(personToEditSubject, newSubjects);
         model.setPerson(personToEditSubject, edittedPerson);
@@ -80,8 +80,8 @@ public class EditSubjectCommand extends Command {
         );
     }
 
-    private static Set<Label> subjectsXorOperarion(Collection<Label> currentSubjects
-            , Collection<Label> subjectsToEdit) {
+    private static Set<Label> subjectsXorOperarion(Collection<Label> currentSubjects,
+                                                   Collection<Label> subjectsToEdit) {
         for (Label subject: subjectsToEdit) {
             if (currentSubjects.contains(subject)) {
                 currentSubjects.remove(subject);
