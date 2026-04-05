@@ -64,7 +64,7 @@ public class EditSubjectCommand extends Command {
         if (!editedPerson.getSubjects().isEmpty()) {
             return new CommandResult(result.toString());
         } else {
-            return new CommandResult(editedPerson.getName() + "'s subject field has been emptied");
+            return new CommandResult(editedPerson.getName() + "'s subject field has been emptied.");
         }
     }
 

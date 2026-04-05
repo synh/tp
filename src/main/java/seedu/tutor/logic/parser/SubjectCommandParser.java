@@ -16,7 +16,7 @@ import seedu.tutor.model.label.Label;
  */
 public class SubjectCommandParser implements Parser<SubjectCommand> {
 
-    private static final String SUBJECT_NAME_ERROR = "Subject name should be alphanumerical.\n";
+    private static final String SUBJECT_NAME_ERROR = "Subject name should be alphanumerical only.\n";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SubjectCommand
@@ -46,14 +46,8 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             if (subjects.length != 2 || userInput.endsWith("/") || index != null) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
             }
-            Label[] labels = new Label[2];
-            try {
-                labels[0] = ParserUtil.parseTag(subjects[0]);
-                labels[1] = ParserUtil.parseTag(subjects[1]);
-            } catch (ParseException pe) {
-                throw new ParseException(SUBJECT_NAME_ERROR);
-            }
-            return new SubjectCommand(null, SubjectCommand.SubjectCommandType.CHANGE, labels);
+            Label[] inputSubjects = getSubjectLabels(subjects);
+            return new SubjectCommand(null, SubjectCommand.SubjectCommandType.CHANGE, inputSubjects);
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT_DELETE).isPresent()) {
@@ -62,17 +56,8 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             if (subjects.length == 0 || userInput.endsWith("/") || index != null) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
             }
-            Label[] labels = new Label[subjects.length];
-            for (int i = 0; i < subjects.length; i++) {
-                Label temp;
-                try {
-                    temp = ParserUtil.parseTag(subjects[i]);
-                } catch (ParseException pe) {
-                    throw new ParseException(SUBJECT_NAME_ERROR);
-                }
-                labels[i] = temp;
-            }
-            return new SubjectCommand(null, SubjectCommand.SubjectCommandType.DELETE, labels);
+            Label[] inputSubjects = getSubjectLabels(subjects);
+            return new SubjectCommand(null, SubjectCommand.SubjectCommandType.DELETE, inputSubjects);
         }
 
         if (argMultimap.getValue(PREFIX_SUBJECT_EDIT).isPresent()) {
@@ -81,17 +66,8 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             if (subjects.length == 0 || userInput.endsWith("/") || index == null) {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
             }
-            Label[] labels = new Label[subjects.length];
-            for (int i = 0; i < subjects.length; i++) {
-                Label temp;
-                try {
-                    temp = ParserUtil.parseTag(subjects[i]);
-                } catch (ParseException pe) {
-                    throw new ParseException(SUBJECT_NAME_ERROR);
-                }
-                labels[i] = temp;
-            }
-            return new SubjectCommand(index, SubjectCommand.SubjectCommandType.EDIT, labels);
+            Label[] inputSubjects = getSubjectLabels(subjects);
+            return new SubjectCommand(index, SubjectCommand.SubjectCommandType.EDIT, inputSubjects);
         }
 
         throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT + SubjectCommand.MESSAGE_USAGE);
@@ -110,5 +86,25 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
             }
         }
         return count;
+    }
+
+    /**
+     * Changes String array into Label array.
+     * @param subjectStrings A String array.
+     * @return A Label array.
+     * @throws ParseException Error if non-alphanumerical character is found in the String array.
+     */
+    private Label[] getSubjectLabels(String[] subjectStrings) throws ParseException {
+        Label[] subjects = new Label[subjectStrings.length];
+        for (int i = 0; i < subjectStrings.length; i++) {
+            Label temp;
+            try {
+                temp = ParserUtil.parseTag(subjectStrings[i]);
+            } catch (ParseException pe) {
+                throw new ParseException(SUBJECT_NAME_ERROR);
+            }
+            subjects[i] = temp;
+        }
+        return subjects;
     }
 }
