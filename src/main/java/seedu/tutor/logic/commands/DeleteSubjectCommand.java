@@ -23,12 +23,12 @@ public class DeleteSubjectCommand extends Command {
      * @param subjectsToDelete An array of subject/s as Label object to be deleted.
      */
     protected DeleteSubjectCommand(Label[] subjectsToDelete) {
+        requireNonNull(subjectsToDelete);
         this.subjectsToDelete = subjectsToDelete;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
         requireNonNull(model);
         List<Person> persons = model.getTutorMap().getPersonList();
         Set<Label> deletedSubjects = new HashSet<>();

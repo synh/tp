@@ -24,13 +24,14 @@ public class ChangeSubjectCommand extends Command {
      * @param newSubject The name of the subject after changed.
      */
     protected ChangeSubjectCommand(Label oldSubject, Label newSubject) {
+        requireNonNull(oldSubject);
+        requireNonNull(newSubject);
         this.oldSubject = oldSubject;
         this.newSubject = newSubject;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
         requireNonNull(model);
         List<Person> persons = model.getTutorMap().getPersonList();
         boolean isChanged = false;

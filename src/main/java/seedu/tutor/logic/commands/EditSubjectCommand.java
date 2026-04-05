@@ -29,6 +29,8 @@ public class EditSubjectCommand extends Command {
      * @param subjectsToEdits The subjects to be added or removed.
      */
     protected EditSubjectCommand(Index index, Label[] subjectsToEdits) {
+        requireNonNull(index);
+        requireNonNull(subjectsToEdits);
         this.index = index;
         this.subjectsToEdits = subjectsToEdits;
     }
