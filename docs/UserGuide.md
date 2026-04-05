@@ -265,7 +265,9 @@ Examples:
 
 Clears all entries from the tutor map.
 
-Command format: `clear`
+Command format: `clear confirm`
+
+**Caution**: This action is irreversible! Command only executes when `clear confirm` is given exactly as an input.
 
 ### <span id="exiting-program"></span>Exiting the program : `exit`
 
