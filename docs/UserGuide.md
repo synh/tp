@@ -164,23 +164,23 @@ Examples:
 * `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2` will add a relation for `Bernice Yu` and `Alex Yeoh` and delete the relation for `David Li` and `Charlotte Oliveiro`
 
 
-### <span id="finding-persons"></span>Locating persons by name: `find`
+### <span id="finding-persons"></span>Locating persons by name: `find n/KEYWORD [KEYWORDS]`
 
 Finds persons whose names contain any of the given keywords.
 
-Command format: `find KEYWORD [MORE_KEYWORDS]`
+Command format: `find n/KEYWORD [MORE_KEYWORDS]`
 
 Notes: 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial searching is supported (i.e. `find n/al` will display anyone with `al` in their names)
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### <span id="finding-persons-by-relation"></span>Locating persons by relation: `find r/KEYWORD`
