@@ -12,7 +12,7 @@ TutorMap offers you a simple way to stay organized without complex software. If 
   - [Adding a person: `add`](#adding-person)
   - [Listing all persons : `list`](#listing-persons)
   - [Editing a person : `edit`](#editing-person)
-  - [Locating persons by name: `find`](#finding-persons)
+  - [Locating persons by name: `find n/`](#finding-persons-by-name)
   - [Locating persons by relation: `find r/`](#finding-persons-by-relation)
   - [Adding or deleting a relation : `relate`](#relating-persons)
   - [Deleting a person : `delete`](#deleting-person)
@@ -164,7 +164,7 @@ Examples:
 * `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2` will add a relation for `Bernice Yu` and `Alex Yeoh` and delete the relation for `David Li` and `Charlotte Oliveiro`
 
 
-### <span id="finding-persons"></span>Locating persons by name: `find n/KEYWORD [KEYWORDS]`
+### <span id="finding-persons-by-name"></span>Locating persons by name: `find n/KEYWORD [KEYWORDS]`
 
 Finds persons whose names contain any of the given keywords.
 
