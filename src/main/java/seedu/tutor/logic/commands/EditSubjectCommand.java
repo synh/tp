@@ -11,7 +11,6 @@ import java.util.Set;
 import seedu.tutor.commons.core.index.Index;
 import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.exceptions.CommandException;
-import seedu.tutor.logic.parser.EditCommandParser;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.label.Label;
 import seedu.tutor.model.person.Person;
