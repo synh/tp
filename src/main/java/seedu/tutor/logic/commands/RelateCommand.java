@@ -35,7 +35,7 @@ public class RelateCommand extends Command {
 
     public static final String COMMAND_WORD = "relate";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add or delete a relation between two person.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds or deletes a relation between two person.\n"
             + "Parameters: "
             + "[" + PREFIX_RELATE_ADD + "RELATION] "
             + "or "
