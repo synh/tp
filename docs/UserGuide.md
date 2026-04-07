@@ -210,11 +210,11 @@ Finds persons that have a tag containing the keyword.
 Command format: `find t/KEYWORD`
 
 Notes:
-* The search is case-insensitive: For example, `friend` will match `Friend`
-* Partial matches are allowed. For example, searching `t/fr` will return results whose tag contains `fr`
+* The search is case-insensitive: For example, `online` will match `Online`
+* Partial matches are allowed. For example, searching `t/On` will return results whose tag contains `On`
 
 Examples:
-* `t/friend` will find everyone labelled with a tag that is or contains `friend`
+* `t/online` will find everyone labelled with a tag that is or contains `online`
 * `t/paid` will find everyone who is labelled with a tag that is or contains `paid` (e.g. `paidFees`)
 
 ### <span id="finding-persons-by-subject"></span>Locating persons by subject: `find s/KEYWORD`
