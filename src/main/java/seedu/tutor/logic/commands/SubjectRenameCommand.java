@@ -23,7 +23,7 @@ public class SubjectRenameCommand extends Command {
      * @param oldSubject The name of the subject to be changed.
      * @param newSubject The name of the subject after changed.
      */
-    protected SubjectRenameCommand(Label oldSubject, Label newSubject) {
+    protected SubjectRenameCommand(Label oldSubject, Label newSubject) throws  CommandException {
         requireNonNull(oldSubject);
         requireNonNull(newSubject);
         this.oldSubject = oldSubject;
@@ -46,10 +46,10 @@ public class SubjectRenameCommand extends Command {
         }
 
         if (isChanged) {
-            return new CommandResult("Subject renamed: " + oldSubject.labelName + " has renamed to "
+            return new CommandResult("Subject renamed: " + oldSubject.labelName + " has been renamed to "
                 + newSubject.labelName + ".");
         } else {
-            return new CommandResult("No subject renamed.");
+            throw new CommandException("Subject not founded: " + oldSubject.labelName + ".");
         }
     }
 

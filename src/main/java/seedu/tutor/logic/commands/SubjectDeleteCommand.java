@@ -30,8 +30,27 @@ public class SubjectDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> persons = model.getFilteredPersonList();
         Set<Label> deletedSubjects = new HashSet<>();
+
+        // checking if all subject exist
+        for (Person currentPerson : persons) {
+            if (!checkPersonContainSubjects(currentPerson, subjectsToDelete)) {
+                Set<Label> subjectNotExist = new HashSet<>();
+                for (Label subject: subjectsToDelete) {
+                    if (!checkPersonContainSubject(currentPerson, subject)) {
+                        subjectNotExist.add(subject);
+                    }
+                }
+                StringBuilder result = new StringBuilder("Subject(s) not found: ");
+                for (Label subject: subjectNotExist) {
+                    result.append(subject.labelName);
+                    result.append(" ");
+                }
+                throw new CommandException(result.toString());
+            }
+        }
 
         for (Person currentPerson : persons) {
             for (Label subjectToDelete : subjectsToDelete) {
@@ -50,10 +69,10 @@ public class SubjectDeleteCommand extends Command {
             result.append(" ");
         }
 
-        if (!deletedSubjects.isEmpty()) {
+        if (deletedSubjects.size() == subjectsToDelete.length) {
             return new CommandResult(result.toString());
         } else {
-            return new CommandResult("No subject deleted.");
+            return new CommandResult("Unknown error: by SubjectDeleteCommand");
         }
     }
 
@@ -90,5 +109,24 @@ public class SubjectDeleteCommand extends Command {
 
         Set<Label> subjects = new HashSet<>(personToCheck.getSubjects());
         return subjects.contains(subject);
+    }
+
+    /**
+     * Checks if subjects are in the subject field of a person.
+     * @param personToCheck The person to check.
+     * @param subjects The subjects.
+     * @return True if contain else false.
+     */
+    private static boolean checkPersonContainSubjects(Person personToCheck, Label[] subjects) {
+        requireNonNull(personToCheck);
+        requireNonNull(subjects);
+
+        Set<Label> personSubjects = new HashSet<>(personToCheck.getSubjects());
+        for (Label subject: subjects) {
+            if (!personSubjects.contains(subject)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

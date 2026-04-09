@@ -11,6 +11,9 @@ import seedu.tutor.logic.commands.SubjectCommand;
 import seedu.tutor.logic.parser.exceptions.ParseException;
 import seedu.tutor.model.label.Label;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Parses input arguments and returns a new SubjectCommand object
  */
@@ -47,6 +50,9 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
             }
             Label[] inputSubjects = getSubjectLabels(subjects);
+            if (inputSubjects[0].equals(inputSubjects[1])) {
+                throw new ParseException("Repeated subject detected.");
+            }
             return new SubjectCommand(null, SubjectCommand.SubjectCommandType.RENAME, inputSubjects);
         }
 
@@ -57,6 +63,16 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
             }
             Label[] inputSubjects = getSubjectLabels(subjects);
+
+            // check repeated subject(s)
+            Set<Label> cache = new HashSet<>();
+            for (Label subject: inputSubjects) {
+                if (cache.contains(subject)) {
+                    throw new ParseException("Repeated subject(s) detected.");
+                }
+                cache.add(subject);
+            }
+
             return new SubjectCommand(null, SubjectCommand.SubjectCommandType.DELETE, inputSubjects);
         }
 
@@ -67,6 +83,16 @@ public class SubjectCommandParser implements Parser<SubjectCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SubjectCommand.MESSAGE_USAGE));
             }
             Label[] inputSubjects = getSubjectLabels(subjects);
+
+            // check repeated subject(s)
+            Set<Label> cache = new HashSet<>();
+            for (Label subject: inputSubjects) {
+                if (cache.contains(subject)) {
+                    throw new ParseException("Repeated subject(s) detected.");
+                }
+                cache.add(subject);
+            }
+
             return new SubjectCommand(index, SubjectCommand.SubjectCommandType.EDIT, inputSubjects);
         }
 
