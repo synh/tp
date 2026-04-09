@@ -46,10 +46,10 @@ public class SubjectRenameCommand extends Command {
         }
 
         if (isChanged) {
-            return new CommandResult("Subject renamed: " + oldSubject.labelName + " has renamed to "
+            return new CommandResult("Subject renamed: " + oldSubject.labelName + " has been renamed to "
                 + newSubject.labelName + ".");
         } else {
-            return new CommandResult("No subject renamed.");
+            throw new CommandException("Subject not founded: " + oldSubject.labelName + ".");
         }
     }
 

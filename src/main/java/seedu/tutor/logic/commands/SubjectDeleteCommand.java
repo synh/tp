@@ -2,6 +2,7 @@ package seedu.tutor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,8 +31,23 @@ public class SubjectDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> persons = model.getFilteredPersonList();
         Set<Label> deletedSubjects = new HashSet<>();
+
+        // checking if all subject exist
+        Set<Label> subjectNotExist = new HashSet<>(Arrays.asList(subjectsToDelete));
+        for (Person currentPerson : persons) {
+            subjectNotExist.removeIf(subject -> checkPersonContainSubject(currentPerson, subject));
+        }
+        if (!subjectNotExist.isEmpty()) {
+            StringBuilder result = new StringBuilder("Subject(s) not found: ");
+            for (Label subject: subjectNotExist) {
+                result.append(subject.labelName);
+                result.append(" ");
+            }
+            throw new CommandException(result.toString());
+        }
 
         for (Person currentPerson : persons) {
             for (Label subjectToDelete : subjectsToDelete) {
@@ -50,10 +66,10 @@ public class SubjectDeleteCommand extends Command {
             result.append(" ");
         }
 
-        if (!deletedSubjects.isEmpty()) {
+        if (deletedSubjects.size() == subjectsToDelete.length) {
             return new CommandResult(result.toString());
         } else {
-            return new CommandResult("No subject deleted.");
+            return new CommandResult("Unknown error: by SubjectDeleteCommand");
         }
     }
 
