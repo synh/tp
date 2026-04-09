@@ -13,7 +13,8 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String DEFAULT_HELP_MESSAGE = "Available commands: \n"
-            + "(For full information, check out the full user guide at https://ay2526s2-cs2103t-w12-3.github.io/tp/UserGuide.html)\n"
+            + "(For full information, check out the full user guide "
+            + "at https://ay2526s2-cs2103t-w12-3.github.io/tp/UserGuide.html)\n"
             + "(type `help [COMMAND]` to see details of each command, eg. `help add`)\n"
             + "- list\n"
             + "- add\n"
