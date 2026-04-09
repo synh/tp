@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class SubjectCommandParser implements Parser<SubjectCommand> {
 
-    private static final String SUBJECT_NAME_ERROR = "Subject name should be alphanumerical only.\n";
+    private static final String SUBJECT_NAME_ERROR = "Subject name should be alphanumerical only and can't be empty.\n";
 
     /**
      * Parses the given {@code String} of arguments in the context of the SubjectCommand
