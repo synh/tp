@@ -13,6 +13,10 @@ import seedu.tutor.logic.Messages;
 import seedu.tutor.logic.commands.exceptions.CommandException;
 import seedu.tutor.model.Model;
 import seedu.tutor.model.person.Person;
+import seedu.tutor.model.relation.Relation;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Adds a person to the address book.
@@ -59,7 +63,13 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        Set<Relation> relationsToAdd = toAdd.getRelations();
+        Person toAddWithoutRelations = new Person(toAdd.getName(), toAdd.getPhone(), toAdd.getEmail(),
+                toAdd.getAddress(), toAdd.getTags(), new HashSet<>(), toAdd.getSubjects());
+        model.addPerson(toAddWithoutRelations);
+        Command relateCommand = new RelateCommand(relationsToAdd, new HashSet<>());
+        relateCommand.execute(model);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
