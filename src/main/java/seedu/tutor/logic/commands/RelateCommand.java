@@ -206,7 +206,7 @@ public class RelateCommand extends Command {
      * Checks if a relation already exist.
      * @param relation The Relation object to check.
      * @param model The model.
-     * @return True if the Relation exist, else false.
+     * @return True if the Relation exists, else false.
      */
     private boolean relationExist(Index index, Relation relation, Model model) {
         Set<Relation> relations = model.getTutorMap().getPersonList().get(index.getZeroBased()).getRelations();
