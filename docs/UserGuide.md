@@ -13,7 +13,7 @@ TutorMap offers you a simple way to stay organized without complex software. If 
   - [Listing all persons : `list`](#listing-persons)
   - [Editing a person : `edit`](#editing-person)
   - [Adding or deleting a relation : `relate`](#relating-persons)
-  - [Finding persons: `find prefix/KEYWORD`](#finding-persons)
+  - [Finding persons: `find`](#finding-persons)
   - [Renaming, deleting or editing subject(s): `subject`](#subject-command)
   - [Deleting a person : `delete`](#deleting-person)
   - [Clearing all entries : `clear`](#clearing-entries)
@@ -165,7 +165,7 @@ Examples:
 * `relate d\Teacher Alex/Bernice Yu/Teacher/Student` will delete the relation for both `Teacher Alex` and `Bernice Yu`
 * `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2` will add a relation for `Bernice Yu` and `Alex Yeoh` and delete the relation for `David Li` and `Charlotte Oliveiro`
 
-### <span id="finding-persons"></span>Finding persons: `find prefix/KEYWORD`
+### <span id="finding-persons"></span>Finding persons: `find`
 
 Finds and displays anyone who has the KEYWORD contained in their field specified by the prefix.
 
