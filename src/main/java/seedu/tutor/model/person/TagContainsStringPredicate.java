@@ -20,6 +20,12 @@ public class TagContainsStringPredicate implements Predicate<Person> {
         this(List.of(keyword));
     }
 
+    /**
+     * Constructs a predicate using multiple keywords.
+     * Each keyword is trimmed, lowercased, and empty tokens are ignored.
+     *
+     * @param keywords Keywords to match against a person's tag labels.
+     */
     public TagContainsStringPredicate(List<String> keywords) {
         requireNonNull(keywords);
         this.keywords = keywords.stream()
@@ -61,4 +67,3 @@ public class TagContainsStringPredicate implements Predicate<Person> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }
-
