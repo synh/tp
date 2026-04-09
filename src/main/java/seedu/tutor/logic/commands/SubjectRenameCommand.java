@@ -23,7 +23,7 @@ public class SubjectRenameCommand extends Command {
      * @param oldSubject The name of the subject to be changed.
      * @param newSubject The name of the subject after changed.
      */
-    protected SubjectRenameCommand(Label oldSubject, Label newSubject) throws  CommandException {
+    protected SubjectRenameCommand(Label oldSubject, Label newSubject) {
         requireNonNull(oldSubject);
         requireNonNull(newSubject);
         this.oldSubject = oldSubject;
