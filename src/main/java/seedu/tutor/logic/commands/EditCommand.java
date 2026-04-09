@@ -46,12 +46,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]..."
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
 
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com\n"
+            + PREFIX_EMAIL + "johndoe@tmail.com\n"
 
             + "Notes: \n"
             + "⚠ INDEX must be a positive integer.\n"
