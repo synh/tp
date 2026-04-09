@@ -68,8 +68,8 @@ TutorMap offers you a simple way to stay organized without complex software. If 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]...` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -93,11 +93,11 @@ Command format: `help`
 
 Adds a person to TutorMap.
 
-Command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT] [t/TAG]…`
+Command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT]... [t/TAG]...`
 
 Notes:
-* A person can have any number of tags (including 0)
 * A person can have any number of subjects (including 0)
+* A person can have any number of tags (including 0)
 * Person fields are case-sensitive (e.g. `John Doe` and `john doe` are different names, `Math` and `math` are different subjects)
 
 Examples:
@@ -115,16 +115,16 @@ Command format: `list`
 
 Edits an existing person in TutorMap.
 
-Command format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [s/SUBJECT]…​`
+Command format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]... [t/TAG]...`
 
 Notes:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, ...
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * When editing subjects, the existing subject of the person will be removed i.e adding of subject is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove the person's subject by typing `s/` without specifying any subject after it.
-* Typing `t/` or `s/` is only valid if there is at least one non-whitespace character after it. Inputs containing only spaces after `t/` or `s/` are invalid.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* Typing `s/` or `t/` is only valid if there is at least one non-whitespace character after it. Inputs containing only spaces after `t/` or `s/` are invalid.
 
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -145,8 +145,9 @@ e.g. if the person at index 1 has an existing tag `friend`, `edit 1 t/friend t/c
 
 Adds a relation between 2 specified people in TutorMap.
 
-Command format (adding relation): `relate a\NAME1/NAME2/RELATION1/RELATION2`  
-Command format (deleting relation): `relate d\NAME1/NAME2/RELATION1/RELATION2`
+Command format: `relate [a\RELATION]... [d\RELATION]...`
+
+`RELATION` format: `Person1/Person2/Relation-Name1/Relation-Name2`
 
 Notes:
 * To add a relation, both names must exist.
@@ -241,37 +242,36 @@ Simply typing `s/C` will match both Chemistry and Chinese subjects!
 
 ### <span id="subject-command"></span>Renaming, deleting, or editing subject(s): `subject`
 
-Renames a subject name across all persons, deletes subject(s) across all displayed persons, or edits one person's subject field.
+Renames a subject name across all currently listed persons, deletes subject(s) across all currently listed persons, or edits one person's subject field.
 
 Command format: 
+* `subject [r\SUBJECT1/SUBJECT2]`
 * `subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`  
 * `subject INDEX [e\SUBJECT1/SUBJECT2/SUBJECT3/...]`
-* `subject [r\SUBJECT1/SUBJECT2]`
 
 Notes:
-* All `SUBJECT` values must be alphanumeric only and non-empty.
+* All `SUBJECT` values must be alphanumeric (without whitespaces) only and non-empty.
+* For renaming a subject:
+    * `r\SUBJECT1/SUBJECT2` renames every instance of `SUBJECT1` to `SUBJECT2` across all currently listed persons' subject fields.
+    * Renaming a non-existing `SUBJECT` is allowed. `No subject renamed.` will be returned if no subject is renamed.
 * For deleting subject(s):
-    * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all displayed persons' subject fields.
-    * `d\` accepts any positive number of subjects.
+    * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all persons' subject fields.
+    * `d\` accepts any positive number of subjects. 
     * Deleting a non-existing `SUBJECT` is allowed. `No subject deleted.` will be returned if no subject is deleted.
 * For editing a person's subject field:
-    * `INDEX e\SUBJECT1/SUBJECT2/...` edits the `INDEX`-th shown person's subject field by toggling each listed subject.
-    * `Index` must be a positive integer.
+    * `INDEX e\SUBJECT1/SUBJECT2/...` edits the `INDEX`-th shown person's subject field by toggling each listed subject. This command provides functionality for adding and removing subjects in a single command.
+    * `INDEX` must be a positive integer.
     * Toggling means:
-        * an existing subject is removed;
-        * a missing subject is added.
+        * an existing subject is removed; and
+        * a non-existing subject is added.
     * `e\` accepts any positive number of subjects.
-    * This command may add and remove subjects in a single use.
-* For renaming a subject:
-    * `r\SUBJECT1/SUBJECT2` renames every instance of `SUBJECT1` to `SUBJECT2` across all displayed persons' subject fields.
-    * Renaming a non-existing `SUBJECT` is allowed. `No subject renamed.` will be returned if no subject is renamed.
 
-Example:
-* `subject d\Mathematics/Mandrin`
-* `subject d\Biology/Physic/Chemistry/History/Art`
-* `subject 1 e\Maths/Biology`
-* `subject 2 e\Physic/Chemistry/History/Art`
+Examples:
 * `subject r\Maths/Mathematics`
+* `subject d\Mathematics/Mandarin`
+* `subject d\Biology/Physics/Chemistry/History/Art`
+* `subject 1 e\Maths/Biology`
+* `subject 2 e\Physics/Chemistry/History/Art`
 
 ### <span id="deleting-person"></span>Deleting a person : `delete`
 
@@ -282,7 +282,7 @@ Command format: `delete INDEX`
 Notes: 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, ...
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the tutor map.
@@ -335,17 +335,16 @@ Furthermore, certain edits can cause the TutorMap to behave in unexpected ways (
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [s/SUBJECT]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT]... [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/relative's child s/math`
 **Clear**  | `clear confirm`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [s/SUBJECT]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]... [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find (by name)**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Find (by relation)**   | `find r/KEYWORD` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu`
 **List**   | `list`
 **Help**   | `help`
-**Relate** (add) | `relate a\NAME1/NAME2/RELATION1/RELATION2`<br> e.g., `relate a\Teacher Alex/Bernice Yu/Teacher/Student`
-**Relate** (delete)| `relate d\NAME1/NAME2/RELATION1/RELATION2`<br> e.g., `relate d\Teacher Alex/Bernice Yu/Teacher/Student`
-**Subject** (delete)|`subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`<br> e.g., `subject d\Art/History/Mandrin/English`
-**Subject** (edit)|`subject INDEX [e\SUBJECT1/SUBJECT2/SUBJECT3/...]`<br> e.g., `subject 1 e\Art/History/Mandrin/English`
-**Subject** (rename)|`subject [r\SUBJECT1/SUBJECT2]`<br> e.g., `subject r\Math/Mathematic`
+**Relate** | `relate [a\RELATION]... [d\RELATION]...`<br> e.g., `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2`
+**Subject** (rename)|`subject [r\SUBJECT1/SUBJECT2]`<br> e.g., `subject r\Math/Mathematics`
+**Subject** (delete)|`subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`<br> e.g., `subject d\Art/History/Mandarin/English`
+**Subject** (edit)|`subject INDEX [e\SUBJECT1/SUBJECT2/SUBJECT3/...]`<br> e.g., `subject 1 e\Art/History/Mandarin/English`
 
