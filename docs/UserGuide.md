@@ -301,7 +301,7 @@ Action     | Format, Examples
 **Clear**  | `clear confirm`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]... [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find n/NAME [MORE_NAMES]` e.g., `find n/James Jake` <br> `find r/RELATION` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu` <br> `find a/ADDRESS` e.g., `find a/Blk`, `find a/kent ridge` <br> `find e/EMAIL` e.g., `find e/john@fakemail.com`, `find e/gmail` <br> `find p/PHONE` e.g., `find p/999`, `find p/8` <br> `find s/SUBJECT` e.g., `find s/Math`, `find s/science`
+**Find** | `find n/NAME [MORE_NAMES]` e.g., `find n/James Jake` <br> `find r/RELATION` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu` <br> `find a/ADDRESS` e.g., `find a/Blk`, `find a/kent ridge` <br> `find e/EMAIL` e.g., `find e/john@fakemail.com`, `find e/gmail` <br> `find p/PHONE` e.g., `find p/999`, `find p/8` <br> `find s/SUBJECT [MORE_SUBJECTS]` e.g., `find s/math english` <br> `find t/TAG [MORE_TAGS]` e.g., `find t/paid online`
 **List**   | `list`
 **Help**   | `help`
 **Relate** | `relate [a\RELATION]... [d\RELATION]...`<br> e.g., `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2`
