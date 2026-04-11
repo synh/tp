@@ -161,7 +161,7 @@ Notes:
 * Relations are bidirectional, `Teacher Alex/Bernice Yu/Teacher/Student` is equivalent to `Bernice Yu/Teacher Alex/Student/Teacher`.
 * The command is case-sensitive for `NAME` e.g. `David` will not match `david`
 * The command is case-sensitive for `RELATION` e.g. `Student` will not match `student`
-* Supports multiple addition and/or deletion operations in the same command e.g. `relate a/a\NAME1/NAME2/RELATION1/RELATION2 d\NAME3/NAME4/RELATION3/RELATION4 ...`, `relate a/NAME1/NAME2/RELATION1/RELATION2 a/NAME3/NAME4/RELATION3/RELATION4 ...`
+* Supports multiple addition and/or deletion operations in the same command e.g. `relate a\NAME1/NAME2/RELATION1/RELATION2 d\NAME3/NAME4/RELATION3/RELATION4 ...`, `relate a\NAME1/NAME2/RELATION1/RELATION2 a\NAME3/NAME4/RELATION3/RELATION4 ...`
 
 Examples:
 * `relate a\Teacher Alex/Bernice Yu/Teacher/Student` will create a relation for both `Teacher Alex` and `Bernice Yu`.
