@@ -90,7 +90,7 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person personToCheck = createEditedPerson(personToEdit, editPersonDescriptor);
-        if (model.hasPerson(personToCheck)) {
+        if (!personToEdit.getName().equals(personToCheck.getName()) && model.hasPerson(personToCheck)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
         editPersonDescriptor.setRelations(null);
