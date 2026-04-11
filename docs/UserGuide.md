@@ -208,9 +208,9 @@ Examples:
 Renames a subject name across all currently listed persons, deletes subject(s) across all currently listed persons, or edits one person's subject field.
 
 Command format: 
-* `subject [r\SUBJECT1/SUBJECT2]`
-* `subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`  
-* `subject INDEX [e\SUBJECT1/SUBJECT2/SUBJECT3/...]`
+* `subject r\SUBJECT1/SUBJECT2`
+* `subject d\SUBJECT1[/SUBJECT2/SUBJECT3/...]`  
+* `subject INDEX e\SUBJECT1[/SUBJECT2/SUBJECT3/...]`
 
 Notes:
 * All `SUBJECT` values must be alphanumeric (without whitespaces) only and non-empty.
