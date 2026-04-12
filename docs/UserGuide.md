@@ -226,6 +226,7 @@ Notes:
 * For renaming a subject:
     * `r\SUBJECT1/SUBJECT2` renames every instance of `SUBJECT1` to `SUBJECT2` across all currently listed persons' subject fields.
     * Renaming a non-existing `SUBJECT` is not allowed.
+    * Renaming a `SUBJECT1` to existing `SUBJECT2` is allowed. 
 * For deleting subject(s):
     * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all persons' subject fields.
     * `d\` accepts any positive number of subjects. 

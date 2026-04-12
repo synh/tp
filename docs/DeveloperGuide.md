@@ -289,6 +289,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a contact                             | remove contacts that I no longer need                                       |
 | `* * *`  | user                                       | find a contact by name                       | locate details of contact without having to go through the entire list      |
 | `* * *`  | user                                       | find other relevant contacts given a contact | see others who are related to my contact if there is a need to contact them |
+| `* *`    | user                                       | add relation between two contacts            | keep track of how they are connected                                        |
+| `* *`    | user                                       | edit the subject field of a contact          | keep the contact's subject information up to date                           |
+| `* *`    | user                                       | rename a subject across the contacts         | correct or standardize subject names easily                                 |
+| `* *`    | user                                       | delete a subject across the contacts         | remove outdated or unnecessary subject records                              |
 | `* *`    | user                                       | be able to tag contacts                      | view information relevant to this contact                                   |
 | `*`      | user with many persons in the contact book | sort persons by name                         | locate a contact easily                                                     |
 
@@ -416,6 +420,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. person1 or person2 doesn't exist
 
     * 1b1: TutorMap shows an error message.
+
+      Use case ends.
+
+* 1c. the relationship already exist between the two person
+
+    * 1b1: TutorMap shows an error message. 
+  
+      Use case ends.
+
+**Use case: UC7 - Deleting a relationship**
+
+**MSS**
+
+1.  User attempts to delete a relationship between two person
+2.  TutorMap displays the change in detail of those two person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Incorrect input format
+
+    * 1a1: TutorMap shows an error message.
+
+      Use case ends.
+
+* 1b. person1 or person2 doesn't exist
+
+    * 1b1: TutorMap shows an error message.
+
+      Use case ends.
+
+* 1c. the relationship does not exist between the two person
+
+    * 1b1: TutorMap shows an error message.
+
+      Use case ends.
+
+**Use case: UC8 - Deleting a subject**
+
+**MSS**
+
+1.  User attempts to delete a subject across multiple person
+2.  TutorMap displays successful deletion of the subject
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Incorrect input format
+
+    * 1a1: TutorMap shows an error message.
+
+      Use case ends.
+
+* 1b. the subject doesn't exist
+
+    * 1b1: TutorMap shows an error message.
+
+      Use case ends.
+
+**Use case: UC8 - Renaming a subject**
+
+**MSS**
+
+1.  User attempts to rename a subject across multiple person
+2.  TutorMap displays the success of renaming of the subject
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Incorrect input format
+
+    * 1a1: TutorMap shows an error message.
+
+      Use case ends.
+
+* 1b. the subject doesn't exist
+
+    * 1b1: TutorMap shows an error message.
+
+      Use case ends.
+
+**Use case: UC8 - Editing subject field**
+
+**MSS**
+
+1.  User attempts to edit a subject field of a person using `subject` command
+2.  TutorMap displays the result subject field of the person
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Incorrect input format
+
+    * 1a1: TutorMap shows an error message.
 
       Use case ends.
 
