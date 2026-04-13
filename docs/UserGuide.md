@@ -258,7 +258,7 @@ Notes:
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the tutor map.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### <span id="clearing-entries"></span>Clearing all entries : `clear`
 
