@@ -30,16 +30,17 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("12")); // fewer than 3 digits
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
         assertFalse(Phone.isValidPhone("(+65)")); // missing digits after prefix
         assertFalse(Phone.isValidPhone("(+65)12")); // fewer than 3 digits after prefix
+        assertFalse(Phone.isValidPhone("(65-12)3456")); // no hyphens inside prefix
 
         // valid phone numbers
+        assertTrue(Phone.isValidPhone("9312 1534")); // spaces within digits
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
         assertTrue(Phone.isValidPhone("(+65)12345678")); // parenthesized country code prefix
-        assertTrue(Phone.isValidPhone("(65-12)3456")); // digits and hyphens inside prefix
+
     }
 
     @Test
