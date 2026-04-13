@@ -10,7 +10,9 @@ import static seedu.tutor.commons.util.AppUtil.checkArgument;
 public class Label {
 
     public static final String MESSAGE_CONSTRAINTS = "Label names (tag / subject) should be "
-            + "alphanumeric and cannot consist only of whitespace";
+            + "alphanumeric and cannot consist only of whitespace.\n"
+            + "Whitespace is not allowed within the label name (e.g s/ma    th is invalid).\n"
+            + "(label names can consist only of whitespaces if using the edit command to remove all labels)";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String labelName;

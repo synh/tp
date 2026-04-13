@@ -107,6 +107,8 @@ Notes:
 * A person can have any number of tags (including 0).
 * Person fields are case-sensitive (e.g. `John Doe` and `john doe` are different names, `Math` and `math` are different subjects).
 * Phone numbers should contain only digits and be at least 3 digits long, optionally prefixed with a parenthesized country code. Examples: `(+65)12389123`, `12398123`, `(1809)12312093`, `(23-39)1289312`
+* If adding a subject using this command, whitespace is ignored before or after subject, but whitespace within subject is rejected. Adding an empty subject is not allowed (e.g: `s/` with no input is not allowed). 
+* If adding a tag using this command, whitespace is ignored before or after tag, but whitespace within tag is rejected. Adding an empty tag is not allowed (e.g: `t/` with no input is not allowed).
 
 * Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -134,6 +136,7 @@ Notes:
 * You can remove the person's subject by typing `s/` without specifying any subject after it.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Inputs containing only spaces after `t/` or `s/` are invalid.
+* Assuming input for `t/` and `s/` are valid, whitespace before or after input is ignored.
 * Phone numbers should contain only digits and be at least 3 digits long, optionally prefixed with a parenthesized country code. Examples: `(+65)12389123`, `12398123`, `(1809)12312093`, `(23-39)1289312`
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.

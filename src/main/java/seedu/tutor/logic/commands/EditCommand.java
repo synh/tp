@@ -56,7 +56,7 @@ public class EditCommand extends Command {
             + "Notes: \n"
             + "⚠ INDEX must be a positive integer.\n"
             + "- " + PREFIX_NAME + ", " + PREFIX_PHONE + ", " + PREFIX_EMAIL + ", "
-            + PREFIX_ADDRESS + ", " + PREFIX_SUBJECT + ", " + PREFIX_TAG + "are optional, "
+            + PREFIX_ADDRESS + ", " + PREFIX_SUBJECT + ", " + PREFIX_TAG + " are optional, "
             + "but at least one must be present.\n"
             + "- " + PREFIX_SUBJECT + ", " + PREFIX_TAG + " can be used once or multiple times.";
 
