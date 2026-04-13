@@ -607,10 +607,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Testing the ability to modify subjects across the entire list or for specific individuals.
 
-   1. Prerequisites: A mix of contacts with `Math`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
+   1. Prerequisites: A mix of contacts with `Maths`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
       
-   2. Test Case (Global Rename): subject r\Math/Mathematics
-      Expected: Every contact currently in the list who had "Math" now has "Mathematics".
+   2. Test Case (Global Rename): subject r\Maths/Mathematics
+      Expected: Every contact currently in the list who had "Maths" now has "Mathematics".
       
    3. Test Case (Batch Delete): subject d\Physics/Chemistry/Biology
       Expected: These three subjects are removed from all contacts in the current list. If any of the subjects do not exist, the command fails.
