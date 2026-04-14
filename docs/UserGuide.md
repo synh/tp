@@ -163,7 +163,7 @@ Notes:
 * For any relation:
   * Both person must exist.
   * `PERSON1` and `PERSON2` must be different.
-  * There is no restriction for relation name (except `\` and `/` are not allowed).
+  * There is no restriction for relation name (except `\` and `/` are not allowed and not empty).
 * For adding relation, the relation to be added must not exist before adding.
 * For deleting relation, the relation to be deleted must exist before deleting.
 * For adding or deleting of relation, the change of relation field will be updated for both persons.
