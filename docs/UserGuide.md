@@ -106,6 +106,11 @@ Command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT]... [t/T
 Notes:
 * A person can have any number of subjects (including 0).
 * A person can have any number of tags (including 0).
+* Name fields are case-sensitive (e.g. `John Doe` and `john doe` are different names).
+* Subject fields are case-sensitive (e.g. `Math` and `math` are different subjects).
+* Phone numbers should contain only digits and be at least 3 digits long, optionally prefixed with a parenthesized country code. Examples: `(+65)12389123`, `12398123`, `(1809)12312093`, `(23-39)1289312`
+* All subjects must be alphanumeric (without whitespaces) only and non-empty. If adding a subject using this command, whitespace is ignored before or after subject, but whitespace within subject is invalid. Adding an empty subject is not allowed (e.g: `s/` with no input is not allowed). Remove the `s/` entirely instead.
+* All tags must be alphanumeric (without whitespaces) only and non-empty. If adding a tag using this command, whitespace is ignored before or after tag, but whitespace within tag is invalid. Adding an empty tag is not allowed (e.g: `t/` with no input is not allowed). Remove the `t/` entirely instead.
 * Contacts are uniquely identified by name field.
 * All names must be alphanumeric (whitespaces allowed) only and non-empty.
 * Differing whitespace in between words in name field are different contacts (e.g. `John Doe` with one whitespace between `John` and `Doe` is a different contact from `John Doe` with two whitespaces between `John` and `Doe`).
@@ -134,11 +139,15 @@ Command format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]
 Notes:
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, ...
 * Existing values will be updated to the input values.
-* When editing subjects, the existing subject of the person will be removed i.e. adding of subject is not cumulative.
+* When editing subjects, the existing subject of the person will be removed i.e. adding of subjects is not cumulative.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove the person's subject by typing `s/` without specifying any subject after it.
+* You can remove the person's subjects by typing `s/` without specifying any subjects after it.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* If removing the person's subjects or tags, the same flag cannot be mentioned in the command again. (e.g: `edit 4 s/math s/` is invalid)
 * Inputs containing only spaces after `t/` or `s/` are invalid.
+* All subjects must be alphanumeric (without whitespaces) only. If adding a subject using this command, whitespace is ignored before or after subject, but whitespace within subject is invalid.
+* All tags must be alphanumeric (without whitespaces) only. If adding a tag using this command, whitespace is ignored before or after tag, but whitespace within tag is invalid.
+* Phone numbers should contain only digits and be at least 3 digits long, optionally prefixed with a parenthesized country code. Examples: `(+65)12389123`, `12398123`, `(1809)12312093`, `(23-39)1289312`
 * Phone numbers should contain at least 3 digits in the main body. Country code and area code may be included in the parentheses and must contain only numbers with an optional `+` after the opening bracket for the country code. You may use a single space or dash between digits for readability in the main body. Examples: `(+65) 9876 5432`, `(+1)(202) 555-0123`, `98765432`.
 
 Examples:
