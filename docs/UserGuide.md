@@ -88,7 +88,7 @@ Command format:
 * `help [COMMAND]`
 
 Notes:
-* The user can type in a command after 'help' to see how to use that command.
+* The user can type in a command after `help` to see how to use that command.
 
 Examples:
 * `help add` will show the user how to use the `add` command.
@@ -105,6 +105,10 @@ Command format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [s/SUBJECT]... [t/T
 Notes:
 * A person can have any number of subjects (including 0).
 * A person can have any number of tags (including 0).
+* Contacts are uniquely identified by name field.
+* All names must be alphanumeric (whitespaces allowed) only and non-empty.
+* Differing whitespace in between words in name field are different contacts (e.g. `John Doe` with one whitespace between `John` and `Doe` is a different contact from `John Doe` with two whitespaces between `John` and `Doe`).
+* Leading or trailing whitespaces in name field are ignored and are the same contact (e.g. ` John` with leading whitespace is the same as `John`).
 * Person fields are case-sensitive (e.g. `John Doe` and `john doe` are different names, `Math` and `math` are different subjects).
 * Phone numbers should contain at least 3 digits in the main body. Country code and area code may be included in the parentheses and must contain only numbers with an optional `+` after the opening bracket. You may use a single space or dash between digits for readability. Examples: `(+65) 9876 5432`, `(+1)(202) 555-0123`, `98765432`.
 
@@ -143,10 +147,6 @@ Examples:
 * `edit 3 s/Math` Edits the subject of the 3rd person to be `Math`.
 * `edit 4 s/English s/Science` Edits the subjects of the 4th person to be `English` and `Science`.
 
-<box type="tip" seamless>
-
-</box>
-
 ### <span id="relating-persons"></span>Adding or deleting a relation : `relate`
 
 Adds a relation between 2 specified people in TutorMap.
@@ -158,9 +158,9 @@ Command format: `relate [a\RELATION]... [d\RELATION]...`
 Notes:
 * For `relate` command, at least one argument of `[a\RELATION]` or `[d\RELATION]` is required.
 * For any relation:
-  *  both person must exist.
+  * Both person must exist.
   * `PERSON1` and `PERSON2` must be different.
-  * There is no restriction for relation name (except `\` is not allowed).
+  * `RELATION_NAME` must not contain `/` or `\` and non-empty.
 * For adding relation, the relation to be added must not exist before adding.
 * For deleting relation, the relation to be deleted must exist before deleting.
 * For adding or deleting of relation, the change of relation field will be updated for both persons.
@@ -171,6 +171,7 @@ Notes:
 * The command is case-sensitive for `PERSON` e.g. `David` will not match `david`
 * The command is case-sensitive for `RELATION_NAME` e.g. `Student` will not match `student`
 * Supports multiple addition and/or deletion operations in the same command e.g. `relate a\RELATION1 d\RELATION2 ...`, `relate a\RELATION1 a\RELATION2 ...`
+* The command adds or deletes relations, but it does not affect which or how many persons are currently shown in the displayed contact list.
 
 Examples:
 * `relate a\Teacher Alex/Bernice Yu/Teacher/Student` will create a relation for both `Teacher Alex` and `Bernice Yu`.
@@ -194,7 +195,7 @@ Command format: `find prefix/KEYWORD`
 
 Notes:
 * All searches are case-insensitive. e.g. `hans` will match `Hans`
-* Partial searching is supported. However, it is advised to be as specific as possible. While the app supports a command that looks like `find r/ce/bo`, resulting in relations between `Alice` and `Bob` to appear, the freedom may seem unintuitive.
+* Partial searching is supported. However, it is advised to be as specific as possible. While the app supports a command that looks like `find r/ce/bo` (matches relation `alice/bob/sister/brother` i.e. the end of Alice's name and the start of Bob's name), resulting in relations between `Alice` and `Bob` to appear, the freedom may seem unintuitive.
 * As relations are bidirectional, `find r/Bernice Yu/Alex Yeoh` is equivalent to `find r/Alex Yeoh/Bernice Yu`
 * Find by name, subject and tag supports multiple inputs. `find n/Sally David` will display anyone who has *either* `Sally` or `David` in their name, and similarly for subjects and tags.
 
@@ -205,8 +206,8 @@ Examples:
 * `find t/online offline` will find everyone labelled with a tag that is or contains `online` OR `offline`
 * `find r/mother` will find everyone who is a mother, or has a mother
 * `find r/brother/sister` will find all brothers who have sister(s), and sisters who have brother(s)
-* `find r/Alex Yeoh` will find everyone related to Alex Yeoh and himself
-* `find r/Alex Yeoh/Bernice Yu` will display both people to see the relations between them
+* `find r/Alex Yeoh` will find everyone related to Alex Yeoh and himself. There will not be any results if he does not have any relation.
+* `find r/Alex Yeoh/Bernice Yu` will display both people to see the relations between them, only if they have relations with each other.
 * `find s/Math` will find everyone labelled with the subject that is or contains `Math`
 * `find s/Math Science` will find everyone labelled with the subject that is or contains `Math` OR `Science`
 * `find e/gmail` will find everyone whose email contains `gmail`
@@ -229,7 +230,7 @@ Notes:
     * Renaming a non-existing `SUBJECT` is not allowed.
     * Renaming a `SUBJECT1` to existing `SUBJECT2` is allowed. 
 * For deleting subject(s):
-    * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all persons' subject fields.
+    * `d\SUBJECT1/SUBJECT2/SUBJECT3` deletes every instance of `SUBJECT1`, `SUBJECT2`, and `SUBJECT3` across all listed persons' subject fields.
     * `d\` accepts any positive number of subjects. 
     * Deleting a non-existing `SUBJECT` is not allowed.
 * For editing a person's subject field:
@@ -256,10 +257,11 @@ Notes:
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, ...
+* When a contact is deleted, all their relations are also deleted from the people who had relations with them.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the tutor map.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### <span id="clearing-entries"></span>Clearing all entries : `clear`
 
@@ -267,7 +269,7 @@ Clears all entries from the tutor map. As a safety measure, `clear` returns the 
 
 Command format: `clear confirm`
 
-**Caution**: This action is irreversible! Use `clear confirm` to clear. Any additional whitespace will be ignored.
+**Caution**: This action is irreversible! Use `clear confirm` to clear. Any additional whitespace will be ignored, and the clearing will still proceed.
 
 ### <span id="exiting-program"></span>Exiting the program : `exit`
 
@@ -313,7 +315,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SUBJECT]... [t/TAG]...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find n/NAME [MORE_NAMES]` e.g., `find n/James Jake` <br> `find r/RELATION` e.g., `find r/mother`, `find r/Alex Yeoh/Bernice Yu` <br> `find a/ADDRESS` e.g., `find a/Blk`, `find a/kent ridge` <br> `find e/EMAIL` e.g., `find e/john@fakemail.com`, `find e/gmail` <br> `find p/PHONE` e.g., `find p/999`, `find p/8` <br> `find s/SUBJECT [MORE_SUBJECTS]` e.g., `find s/math english` <br> `find t/TAG [MORE_TAGS]` e.g., `find t/paid online`
 **List**   | `list`
-**Help**   | `help`
+**Help**   | `help` <br> `help COMMAND` <br> eg. `help add`
 **Relate** | `relate [a\RELATION]... [d\RELATION]...`<br> e.g., `relate a\Bernice Yu/Alex Yeoh/parent/child d\David Li/Charlotte Oliveiro/brother1/brother2`
 **Subject** (rename)|`subject [r\SUBJECT1/SUBJECT2]`<br> e.g., `subject r\Math/Mathematics`
 **Subject** (delete)|`subject [d\SUBJECT1/SUBJECT2/SUBJECT3/...]`<br> e.g., `subject d\Art/History/Mandarin/English`

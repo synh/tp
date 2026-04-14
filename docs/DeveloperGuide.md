@@ -287,9 +287,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                      |
 | `* * *`  | new user                                   | see an initial help message                  | see how to get started with the App                                         |
 | `* * *`  | user                                       | delete a contact                             | remove contacts that I no longer need                                       |
-| `* * *`  | user                                       | find a contact by name                       | locate details of contact without having to go through the entire list      |
-| `* * *`  | user                                       | find other relevant contacts given a contact | see others who are related to my contact if there is a need to contact them |
-| `* *`    | user                                       | add relation between two contacts            | keep track of how they are connected                                        |
+| `* * *`  | user                                       | find a contact by different fields           | locate details of contact without having to go through the entire list      |
+| `* * *`  | user                                       | add relation between two contacts            | keep track of how they are connected                                        |
+| `* *`    | user                                       | find other relevant contacts given a contact | see others who are related to my contact if there is a need to contact them |
 | `* *`    | user                                       | edit the subject field of a contact          | keep the contact's subject information up to date                           |
 | `* *`    | user                                       | rename a subject across the contacts         | correct or standardize subject names easily                                 |
 | `* *`    | user                                       | delete a subject across the contacts         | remove outdated or unnecessary subject records                              |
@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User performs Listing all Persons (UC01) or Finding a person (UC5)
+1.  User performs Listing all Persons (UC1) or Finding a person (UC5)
 2.  User requests to add a person to the list
 3.  TutorMap adds the person
 
@@ -359,7 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User performs Listing all Persons (UC01) or Finding a person (UC5)
+1.  User performs Listing all Persons (UC1) or Finding a person (UC5)
 2.  User requests to edit a person on the list
 3.  TutorMap edits the person
 
@@ -523,7 +523,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should run on any mainstream OS that supports Java without requiring OS-specific setup beyond Java.
+1.  Should run on any mainstream OS that supports Java without requiring OS-specific setup beyond Java and JDK.
 2.  All user data should be stored locally on the user’s device.
 3.  Should not artificially restrict the number of contacts i.e. performance limited by user's hardware only.
 4.  Should not impose a hard limit on the number of labels per contact.
@@ -561,9 +561,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Navigate to the directory containing `tutormap.jar` on the terminal. Run `java -jar tutormap.jar`. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -607,13 +607,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Testing the ability to modify subjects across the entire list or for specific individuals.
 
-   1. Prerequisites: A mix of contacts with `Math`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
+   1. Prerequisites: A mix of contacts with `Maths`, `Physics`, `Chemistry`, `Biology`, and 1 subject with both `English` and `History`.
       
-   2. Test Case (Global Rename): subject r\Math/Mathematics
-      Expected: Every contact currently in the list who had "Math" now has "Mathematics".
+   2. Test Case (Global Rename in list): subject r\Maths/Mathematics
+      Expected: Every contact currently *in the list* who had "Maths" now has "Mathematics".
       
    3. Test Case (Batch Delete): subject d\Physics/Chemistry/Biology
-      Expected: These three subjects are removed from all contacts in the current list. If any of the subjects do not exist, the command fails.
+      Expected: These three subjects are removed from all contacts *in the current list*. If any of the subjects do not exist, the command fails.
       
    4. Test Case (Toggle Subject via Index): subject 1 e\English/History
       Expected: If Person 1 already had "English", it is removed. If they did not have "History", it is added.
@@ -623,7 +623,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding Contacts
 
-1. Testing the flexibility of the esarch system across different prefixes.
+1. Testing the flexibility of the search system across different prefixes.
 
     1. Test Case (Multiple Name Search): find n/Sally David
        Expected: Lists all persons whose names contain "Sally" OR "David".
@@ -651,6 +651,20 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. TutorMap does not erase all your data in case a corrupted data file exists. 
-   2. Error messages will show up when the fields are edited from within the app.
-   3. It is advised that the error messages are followed and the data file edited according to the error messages.
+   1. If your changes to the data file makes its format invalid, TutorMap will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+   2. TutorMap does not erase all your data in case an invalid relation exists that still conforms to the relation format `name1/name2/relation1/relation2`. However, it may behave in unexpected ways.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Make `name` field more permissible.** The current `name` field only allows alphanumeric and whitespace characters, which might prevent the addition of real names like `O'Brien`. We plan to allow non-alphanumeric, as well as non-English characters.
+2. **Make `subject` field more permissible.** The current `subject` field only allows alphanumeric characters, which might prevent the addition of subjects like `H2 Math`. We plan to allow non-alphanumeric, as well as non-English characters.
+3. **Make `tag` field more permissible.** The current `tag` field only allows alphanumeric characters, which might prevent the addition of tags like `consult-based tutoring`. We plan to allow non-alphanumeric, as well as non-English characters.
+4. **Trim `name` fields with multiple whitespace between words.** The current `name` field accepts names with different internal whitespace as separate names, which usually does not appear in regular names and are mostly likely typos. We plan to trim multiple whitespace into 1 whitespace, and treat these contacts as the same person.  
+5. **Treat `name` fields with different capitalization as the same person.** The current `name` field treats names with different capitalization as separate names, which usually should be referring to the same person. We plan to treat these contacts as the same person.  
+6. **Create unique index identifier for contacts.** The current app uses the `name` field as a unique contact identifier, which prevents multiple contacts of the same name from being added. We plan to add a unique numerical identifier for each contact added, to allow for duplicate names.
+7. **Allow `relate` command to only be performed on people on the current display list.** The current implementation allows the relation of everyone in the app regardless of whether it is currently being filtered and displayed. We plan to only allow for relating contacts on the filtered list to align with other commands like `delete` that can only be performed on the filtered list.
+

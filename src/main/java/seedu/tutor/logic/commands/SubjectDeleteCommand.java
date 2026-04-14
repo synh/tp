@@ -66,11 +66,7 @@ public class SubjectDeleteCommand extends Command {
             result.append(" ");
         }
 
-        if (deletedSubjects.size() == subjectsToDelete.length) {
-            return new CommandResult(result.toString());
-        } else {
-            return new CommandResult("Unknown error: by SubjectDeleteCommand");
-        }
+        return new CommandResult(result.toString());
     }
 
     //@@author synh-reused
